@@ -1,0 +1,59 @@
+﻿@model VidlyIdentity.ViewModel.RandomMovieViewModel
+
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+@Html.ActionLink("New Movie", "New", "Movies", null, new { @class = "btn btn-primary" })
+
+
+<br />
+<br />
+<br />
+<table id="movies" class="table-striped table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>Movies</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
+                <td>@movie.Genre.Name</td>
+            </tr>
+
+        }
+    </tbody>
+
+</table>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $("#movies").DataTable();/*({
+            ajax: {
+                url: "/api/movies",
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "name",
+                    render: function (data, type, movie) {
+                        return "<a href ='/movies/edit" + movie.id + "'>" + movie.name + "</a>";
+                    },
+                },
+                {
+                    data: "name"
+                }
+            ]
+        });*/
+    });
+</script>
+    }
